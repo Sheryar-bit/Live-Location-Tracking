@@ -1,6 +1,7 @@
 # Live Location Tracking System 🌍
 
-![Project Banner](![image](https://github.com/user-attachments/assets/3f6dd08b-36cb-4f94-81ac-695b0e78df41)
+**Project View**
+(![image](https://github.com/user-attachments/assets/3f6dd08b-36cb-4f94-81ac-695b0e78df41)
 
 The **Live Location Tracking System** is a real-time application that allows users to share their live location and admins to view the locations of all users on a map. Built with **Node.js**, **Express**, **Socket.IO**, and **MongoDB**, this system is designed for simplicity, scalability, and real-time interaction.
 
@@ -41,11 +42,11 @@ The **Live Location Tracking System** is a real-time application that allows use
 
 ## Screenshots 📸
 
-### User View
-![User View](![image](https://github.com/user-attachments/assets/5e8c4843-aad8-4f41-82df-4af05484c50d)
+**User View**
+(![image](https://github.com/user-attachments/assets/5e8c4843-aad8-4f41-82df-4af05484c50d)
 
-### Admin View
-![Admin View](![image](https://github.com/user-attachments/assets/76a16d7f-d8b2-4939-9ae3-970c62f95747)
+**Admin View**
+(![image](https://github.com/user-attachments/assets/76a16d7f-d8b2-4939-9ae3-970c62f95747)
 
 ---
 
