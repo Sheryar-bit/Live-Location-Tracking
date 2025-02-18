@@ -1,7 +1,6 @@
 # Live Location Tracking System 🌍
 
 ![Project Banner](![image](https://github.com/user-attachments/assets/3f6dd08b-36cb-4f94-81ac-695b0e78df41)
-)
 
 The **Live Location Tracking System** is a real-time application that allows users to share their live location and admins to view the locations of all users on a map. Built with **Node.js**, **Express**, **Socket.IO**, and **MongoDB**, this system is designed for simplicity, scalability, and real-time interaction.
 
@@ -44,11 +43,9 @@ The **Live Location Tracking System** is a real-time application that allows use
 
 ### User View
 ![User View](![image](https://github.com/user-attachments/assets/5e8c4843-aad8-4f41-82df-4af05484c50d)
-)
 
 ### Admin View
 ![Admin View](![image](https://github.com/user-attachments/assets/76a16d7f-d8b2-4939-9ae3-970c62f95747)
-)
 
 ---
 
@@ -76,7 +73,7 @@ The **Live Location Tracking System** is a real-time application that allows use
 3. **Set up environment variables**:
    Create a `.env` file in the root directory and add the following:
    ```env
-   MONGO_URI=mongodb://localhost:27017/live-location
+   MONGO_URI=mongodb://localhost:27017/YOURCONNECTION
    JWT_SECRET=your_jwt_secret_key
    PORT=5000
    ```
@@ -183,7 +180,7 @@ Contributions are welcome! If you'd like to contribute, please follow these step
 
 For questions or feedback, feel free to reach out:
 
-- **Your Name**  
+- **Name**: Muhammad Sheryar  
 - **Email**: alisharyar93@gmail.com  
 - **GitHub**: [Sheryar-bit](https://github.com/Sheryar-bit)  
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
+- **LinkedIn**: [LinkedIn Profile](https://pk.linkedin.com/in/httsheryar-ali-53349a219)
