@@ -10,8 +10,6 @@
         "src": "src/**/*",
         "use": "@vercel/static"
       }
-    ],
-    "router": [
-      {"src": "/(.*)", "dest": "/" }
     ]
+    
   }
