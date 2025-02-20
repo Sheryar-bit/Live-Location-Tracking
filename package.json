@@ -2,12 +2,13 @@
   "name": "testing",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
      "build": "npm run build:assets",
-  "start": "node index.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
