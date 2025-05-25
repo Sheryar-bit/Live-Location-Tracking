@@ -30,7 +30,6 @@ mongoose
     app.use(express.static(path.join(__dirname, "public")));
     app.use(express.static('public'));
 
-    // app.set('view engine', 'ejs');
     // app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.render('index');
@@ -39,7 +38,7 @@ app.get('/', (req, res) => {
 // User Schema
 const userSchema = new mongoose.Schema({
     name: { type: String, unique: true, required: true },
-    email: { type: String, unique: true, required: true }, // Ensure this line exists
+    email: { type: String, unique: true, required: true }, 
     password: { type: String, required: true },
     role: { type: String, enum: ["user", "admin"], default: "user" }
 });
@@ -85,36 +84,6 @@ app.post("/register", async (req, res) => {
         res.status(400).json({ error: error.message || "Registration failed" });
     }
 });
-
-// app.post("/register", async (req, res) => {
-//     try {
-//         console.log("Registration request received:", req.body);
-//         const { name, password, role } = req.body;
-        
-//         if (!name || !password) {
-//             console.log("Missing required fields");
-//             return res.status(400).json({ error: "Name and password are required" });
-//         }
-
-//         const existingUser = await User.findOne({ name });
-//         if (existingUser) {
-//             console.log("Registration failed: Name already exists");
-//             return res.status(400).json({ error: "Name already exists" });
-//         }
-
-//         const hashedPassword = await bcrypt.hash(password, 10);
-//         const newUser = new User({ name, password: hashedPassword, role: role || "user" });
-//         await newUser.save();
-        
-//         console.log("User registered successfully:", newUser);
-//         res.status(201).json({ message: "User registered successfully" });
-//     } catch (error) {
-//         console.error("Registration error:", error);
-//         res.status(400).json({ error: error.message || "Registration failed" });
-//     }
-// });
-
-
 
 // User Login
 app.post("/login", async (req, res) => {
@@ -205,57 +174,6 @@ io.on("connection", (socket) => {
         console.log("User disconnected:", socket.userId);
     });
 });
-
-// io.on("connection", (socket) => {
-//     console.log("User connected:", socket.userId);
-//     socket.on("send-location", async (data) => {
-//         const newLocation = new Location({
-//             userId: socket.userId,
-//             latitude: data.latitude,
-//             longitude: data.longitude,
-//         });
-//         await newLocation.save();
-
-//         const user = await User.findById(socket.userId);
-//         if (user.role === "admin") {
-//             // Fetch all locations and include user names
-//             const locations = await Location.aggregate([
-//                 {
-//                     $lookup: {
-//                         from: "users", // The collection name for users
-//                         localField: "userId",
-//                         foreignField: "_id",
-//                         as: "userDetails"
-//                     }
-//                 },
-//                 {
-//                     $unwind: "$userDetails" // Unwind the userDetails array
-//                 },
-//                 {
-//                     $project: {
-//                         userId: 1,
-//                         latitude: 1,
-//                         longitude: 1,
-//                         timestamp: 1,
-//                         userName: "$userDetails.name" // Include the user's name
-//                     }
-//                 }
-//             ]);
-//             io.to(socket.id).emit("all-locations", locations);
-//         } else {
-//             // Regular users only see their own location
-//             io.to(socket.id).emit("receive-location", {
-//                 id: socket.userId,
-//                 latitude: data.latitude,
-//                 longitude: data.longitude,
-//             });
-//         }
-//     });
-
-//     socket.on("disconnect", () => {
-//         console.log("User disconnected:", socket.userId);
-//     });
-// });
 
 const PORT = process.env.PORT || 5000;
 server.listen(process.env.PORT, () => {
