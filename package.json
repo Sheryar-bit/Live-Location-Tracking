@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "build": "npm run build:assets",
+    "build": "npm run build:assets",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -14,14 +13,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-tabs": "^1.1.12",
     "bcryptjs": "^3.0.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.511.0",
     "mongoose": "^8.10.1",
     "nodemon": "^3.1.9",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "tailwind-merge": "^3.3.0"
   }
 }
