@@ -27,7 +27,7 @@ mongoose
     .catch(err => console.log(err));
  
     app.set('view engine', 'ejs');
-    app.use(express.static(path.join(__dirname, "public")));
+    app.use(express.static(path.join(__dirname, "src")));
     app.use(express.static('public'));
 
     // app.use(express.static('public'));
@@ -161,7 +161,6 @@ io.on("connection", (socket) => {
             const locations = await Location.find({});
             io.to(socket.id).emit("all-locations", locations);
         } else {
-            // Regular users only see their own location
             io.to(socket.id).emit("receive-location", {
                 id: socket.userId,
                 latitude: data.latitude,
@@ -173,6 +172,81 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
         console.log("User disconnected:", socket.userId);
     });
+});
+
+
+// Get all users (admin only)
+app.get("/api/users", async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const adminUser = await User.findById(decoded.userId);
+        
+        if (adminUser.role !== 'admin') {
+            return res.status(403).json({ error: "Admin access required" });
+        }
+
+        const users = await User.find({}, { password: 0 }); 
+        res.json(users);
+    } catch (error) {
+        console.error("Get users error:", error);
+        res.status(500).json({ error: "Failed to fetch users" });
+    }
+});
+
+// Get user locations (admin only)
+app.get("/api/user-locations", async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const adminUser = await User.findById(decoded.userId);
+        
+        if (adminUser.role !== 'admin') {
+            return res.status(403).json({ error: "Admin access required" });
+        }
+
+        // Get latest location for each user
+        const locations = await Location.aggregate([
+            {
+                $sort: { timestamp: -1 }
+            },
+            {
+                $group: {
+                    _id: "$userId",
+                    latitude: { $first: "$latitude" },
+                    longitude: { $first: "$longitude" },
+                    timestamp: { $first: "$timestamp" }
+                }
+            }
+        ]);
+
+        // Get user details for each location
+        const userLocations = await Promise.all(
+            locations.map(async (location) => {
+                const user = await User.findById(location._id, { password: 0 });
+                return {
+                    userId: location._id,
+                    user: user,
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    timestamp: location.timestamp
+                };
+            })
+        );
+
+        res.json(userLocations);
+    } catch (error) {
+        console.error("Get user locations error:", error);
+        res.status(500).json({ error: "Failed to fetch user locations" });
+    }
 });
 
 const PORT = process.env.PORT || 5000;
