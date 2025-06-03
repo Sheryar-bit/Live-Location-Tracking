@@ -22,6 +22,21 @@ LocationTrack is a modern, full-stack web application that provides real-time lo
 - [Contributing](#-contributing)
 - [License](#-license)
 
+## 🖼️ Screenshots
+
+### Authentication Page
+![Sign Up/ Login Page](image.png)
+
+### Admin Dashboard
+![Admin Dashboard](image-1.png)
+
+### Admin Gets All Users
+![All User](image-3.png)
+
+### User Dashboard
+![User Dashboard](image-2.png)
+
+
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
@@ -444,20 +459,6 @@ locationtrack/
 - **`backend/routes/`**: Express.js API route handlers
 - **`backend/middleware/`**: Custom middleware functions
 - **`backend/socket/`**: Socket.io event handlers
-
-## 🖼️ Screenshots
-
-### Authentication Page
-![Sign Up/ Login Page](image.png)
-
-### Admin Dashboard
-![Admin Dashboard](image-1.png)
-
-### Admin Gets All Users
-![All User](image-3.png)
-
-### User Dashboard
-![User Dashboard](image-2.png)
 
 
 ### Available Scripts
