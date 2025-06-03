@@ -4,7 +4,6 @@
 
 LocationTrack is a modern, full-stack web application that provides real-time location tracking capabilities with role-based access control. Built with React and Node.js, it offers a seamless experience for both users and administrators to monitor locations in real-time.
 
-![LocationTrack Demo](https://img.shields.io/badge/Status-Active-brightgreen)
 ![React](https://img.shields.io/badge/React-18.x-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-green)
 ![Socket.io](https://img.shields.io/badge/Socket.io-Real--time-orange)
@@ -454,8 +453,12 @@ locationtrack/
 ### Admin Dashboard
 ![Admin Dashboard](image-1.png)
 
+### Admin Gets All Users
+![All User](image-3.png)
 
-## 🔧 Development
+### User Dashboard
+![User Dashboard](image-2.png)
+
 
 ### Available Scripts
 
@@ -484,52 +487,6 @@ npm run build
 cd backend
 npm start
 ```
-
-## 🚀 Deployment
-
-### Frontend Deployment (Vercel)
-
-1. **Connect Repository**
-   ```bash
-   # Install Vercel CLI
-   npm i -g vercel
-   
-   # Deploy
-   vercel
-   ```
-
-2. **Environment Variables**
-   Add environment variables in Vercel dashboard:
-   - `REACT_APP_API_BASE_URL`
-   - `REACT_APP_SOCKET_URL`
-   - Other frontend environment variables
-
-### Backend Deployment (Railway/Heroku)
-
-1. **Railway Deployment**
-   ```bash
-   # Install Railway CLI
-   npm install -g @railway/cli
-   
-   # Login and deploy
-   railway login
-   railway init
-   railway up
-   ```
-
-2. **Environment Variables**
-   Set in Railway dashboard:
-   - `MONGODB_URI`
-   - `JWT_SECRET`
-   - `CORS_ORIGIN`
-
-### Database (MongoDB Atlas)
-
-1. Create MongoDB Atlas cluster
-2. Configure network access
-3. Create database user
-4. Get connection string
-5. Update `MONGODB_URI` in production
 
 ## 🤝 Contributing
 
