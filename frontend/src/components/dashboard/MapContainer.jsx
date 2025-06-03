@@ -15,12 +15,12 @@ function MapContainer({ locationData, userRole, users = [] }) {
   }, [initializeMap])
 
   useEffect(() => {
-    if (locationData.length > 0) {
-      updateMapMarkers(locationData, userRole, users)
+    
+    if (Array.isArray(locationData) && locationData.length > 0) {
+      const safeUsers = Array.isArray(users) ? users : []
+      updateMapMarkers(locationData, userRole, safeUsers)
     }
   }, [locationData, updateMapMarkers, userRole, users])
-
-  // Add custom CSS for tooltips
   useEffect(() => {
     const style = document.createElement("style")
     style.textContent = `
