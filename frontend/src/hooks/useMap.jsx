@@ -15,7 +15,6 @@ export function useMap() {
     (container) => {
       if (mapInstanceRef.current || !container) return
 
-      // Load Leaflet dynamically
       const script = document.createElement("script")
       script.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
       script.onload = () => {
@@ -45,13 +44,21 @@ export function useMap() {
 
     const map = mapInstanceRef.current
 
-    locations.forEach(({ userId, latitude, longitude }) => {
-      // Find user information
-      const user = users.find((u) => u._id === userId || u.id === userId)
-      const userName = user ? user.name : `User ${userId.slice(-6)}`
+    if (!Array.isArray(locations)) {
+      console.warn("Locations is not an array:", locations)
+      return
+    }
 
-      if (markersRef.current[userId]) {
-        markersRef.current[userId].setLatLng([latitude, longitude])
+    locations.forEach(({ userId, latitude, longitude }) => {
+      const safeUserId = userId ? String(userId) : "unknown"
+      const idDisplay = safeUserId.slice(-6) 
+
+      // Find user information
+      const user = Array.isArray(users) ? users.find((u) => u && (u._id === userId || u.id === userId)) : null
+      const userName = user ? user.name : `User ${idDisplay}`
+
+      if (markersRef.current[safeUserId]) {
+        markersRef.current[safeUserId].setLatLng([latitude, longitude])
       } else {
         const marker = window.L.marker([latitude, longitude]).addTo(map)
 
@@ -59,14 +66,13 @@ export function useMap() {
         const popupContent = `<div style="text-align: center; padding: 8px;">
           <strong style="color: #2563eb; font-size: 14px;">${userName}</strong>
           <br>
-          <small style="color: #6b7280;">User ID: ${userId.slice(-6)}</small>
+          <small style="color: #6b7280;">User ID: ${idDisplay}</small>
           <br>
           <small style="color: #6b7280;">Lat: ${latitude.toFixed(6)}</small>
           <br>
           <small style="color: #6b7280;">Lng: ${longitude.toFixed(6)}</small>
         </div>`
 
-        // Bind popup to marker
         marker.bindPopup(popupContent)
 
         // For admin users, make markers clickable to show user name
@@ -93,7 +99,7 @@ export function useMap() {
           </div>`)
         }
 
-        markersRef.current[userId] = marker
+        markersRef.current[safeUserId] = marker
       }
     })
 
