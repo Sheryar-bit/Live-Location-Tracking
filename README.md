@@ -25,16 +25,19 @@ LocationTrack is a modern, full-stack web application that provides real-time lo
 ## 🖼️ Screenshots
 
 ### Authentication Page
-![Sign Up/ Login Page](image.png)
+![Sign Up/ Login Page](/frontend/public/image.png)
+
+### Mobile View
+![Sign Up/ Login Page](/frontend/public/mobile_view.png)
 
 ### Admin Dashboard
-![Admin Dashboard](image-1.png)
+![Admin Dashboard](/frontend/public/new_IMG.png)
 
 ### Admin Gets All Users
-![All User](image-3.png)
+![All User](/frontend/public/image-3.png)
 
 ### User Dashboard
-![User Dashboard](image-2.png)
+![User Dashboard](/frontend/public/image-2.png)
 
 
 ## ✨ Features
