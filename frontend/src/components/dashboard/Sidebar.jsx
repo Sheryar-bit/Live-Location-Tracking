@@ -1,6 +1,6 @@
 "use client"
 
-import { Globe, Users, Activity, Shield, Settings, LogOut, Menu, X, MapPin } from "lucide-react"
+import { Globe, Users, Shield, Settings, LogOut, Menu, X, MapPin } from "lucide-react"
 import { useAuth } from "../../contexts/AuthContext"
 
 function Sidebar({ sidebarOpen, setSidebarOpen, userRole, onNavigate, currentView }) {
