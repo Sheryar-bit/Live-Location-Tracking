@@ -11,10 +11,5 @@
       "src": "/(.*)",
       "dest": "app.js"    
         }
-  ],
-  "includeFiles": [
-    "views/**",           
-    "css/**",             
-    "js/**"               
   ]
 }
