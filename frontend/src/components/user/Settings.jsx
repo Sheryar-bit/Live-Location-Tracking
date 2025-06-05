@@ -6,7 +6,7 @@ import { useTheme } from "../../contexts/ThemeContext"
 
 function Settings({ onBack }) {
   const { theme: currentTheme } = useTheme()
-  const [theme, setTheme] = useState(currentTheme)
+  const [theme] = useState(currentTheme)
 
   const [settings, setSettings] = useState({
     // Profile Settings
