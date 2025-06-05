@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
-  const API_BASE = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000" || "https://live-location-tracking.vercel.app/"
+  const API_BASE = process.env.REACT_APP_API_BASE_URL || "https://live-location-tracking.vercel.app/"
 
   useEffect(() => {
     const token = localStorage.getItem("token")
