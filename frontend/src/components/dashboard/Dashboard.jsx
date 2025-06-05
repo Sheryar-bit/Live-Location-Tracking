@@ -53,8 +53,6 @@ function Dashboard() {
     switch (currentView) {
       case "users":
         return <UserManagement onBack={() => setCurrentView("map")} />
-      case "analytics":
-        return <Analytics onBack={() => setCurrentView("map")} />
       case "privacy":
         return <Privacy onBack={() => setCurrentView("map")} />
       case "settings":

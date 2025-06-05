@@ -26,12 +26,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen, userRole, onNavigate, currentVie
       available: userRole === "admin",
     },
     {
-      id: "analytics",
-      label: "Analytics",
-      icon: Activity,
-      available: true,
-    },
-    {
       id: "privacy",
       label: "Privacy",
       icon: Shield,
