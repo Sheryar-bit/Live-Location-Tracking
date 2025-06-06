@@ -10,6 +10,28 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 const server = http.createServer(app);
+
+const allowedOrigins = [
+  'https://gleaming-stardust-c1753b.netlify.app/',
+  'http://localhost:3000' // For local development
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Handle preflight requests
+app.options('*', cors());
+
 const io = socketIo(server, {
     cors: {
         origin: "*",
