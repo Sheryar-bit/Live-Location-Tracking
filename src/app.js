@@ -9,67 +9,16 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const app = express();
-// const server = http.createServer(app);
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+    },
+});
 
-// const allowedOrigins = [
-//   'https://gleaming-stardust-c1753b.netlify.app/',
-//   'http://localhost:3000' // For local development
-// ];
-
-// app.use(cors({
-//   origin: function(origin, callback) {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-
-// // Handle preflight requests
-// app.options('*', cors());
-
-// const io = socketIo(server, {
-//     cors: {
-//         origin: "*",
-//         methods: ["GET", "POST"],
-//     },
-// });
-
-// app.use(cors());
-// app.use(express.json());
-
-const allowedOrigins = [
-  'https://gleaming-stardust-c1753b.netlify.app',
-  'http://localhost:3000'
-];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-
-    const normalizedOrigin = origin.endsWith('/')
-      ? origin.slice(0, -1)
-      : origin;
-
-    if (allowedOrigins.includes(normalizedOrigin)) {
-      callback(null, true);
-    } else {
-      console.error('Blocked by CORS:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-};
-
-app.use(cors(corsOptions));
-
-app.options('*', cors(corsOptions));
+app.use(cors());
+app.use(express.json());
 
 // Connect to MongoDB
 mongoose
