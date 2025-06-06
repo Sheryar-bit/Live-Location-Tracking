@@ -43,19 +43,18 @@ const app = express();
 // app.use(express.json());
 
 const allowedOrigins = [
-  'https://gleaming-stardust-c1753b.netlify.app',  // Removed trailing slash
+  'https://gleaming-stardust-c1753b.netlify.app',
   'http://localhost:3000'
 ];
 
-// Configure Express CORS
-app.use(cors({
-  origin: function(origin, callback) {
+const corsOptions = {
+  origin: function (origin, callback) {
     if (!origin) return callback(null, true);
-    
-    const normalizedOrigin = origin.endsWith('/') 
-      ? origin.slice(0, -1) 
+
+    const normalizedOrigin = origin.endsWith('/')
+      ? origin.slice(0, -1)
       : origin;
-      
+
     if (allowedOrigins.includes(normalizedOrigin)) {
       callback(null, true);
     } else {
@@ -66,18 +65,11 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}));
+};
 
-app.options('*', cors());  
+app.use(cors(corsOptions));
 
-const io = socketIo(server, {
-  cors: {
-    origin: allowedOrigins, 
-    methods: ["GET", "POST"],
-    credentials: true
-  }
-});
-app.use(express.json());
+app.options('*', cors(corsOptions));
 
 // Connect to MongoDB
 mongoose
