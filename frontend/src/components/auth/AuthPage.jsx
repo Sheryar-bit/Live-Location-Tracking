@@ -24,7 +24,7 @@ function AuthPage() {
             </div>
             <div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                LocationTrack
+                Track Me
               </span>
               <p className="text-xs text-gray-500 dark:text-gray-400 -mt-1">Real-time tracking solution</p>
             </div>
