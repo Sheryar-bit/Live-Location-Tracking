@@ -4,9 +4,12 @@ import { useState } from "react"
 import { Globe, Eye, EyeOff, Mail, User, Lock } from "lucide-react"
 import { useAuth } from "../../contexts/AuthContext"
 
+
 function AuthForm() {
   const [authMode, setAuthMode] = useState("login")
   const [showPassword, setShowPassword] = useState(false)
+  const [emailError, setEmailError] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,6 +32,28 @@ function AuthForm() {
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
+
+  
+  const handleInputtChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+
+    // Validate email on change
+    if (field === "email") {
+      if (!value) {
+        setEmailError("Email is required.");
+      } else if (!emailRegex.test(value)) {
+        setEmailError("Please enter a valid email address.");
+      } else {
+        setEmailError("");
+      }
+    }
+  };
+
+
+const email = formData.email.trim();
+const emailRegex = /^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+const forbiddenStartChars = ['-', '.', '_'];
+
 
   return (
     <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 p-8 relative overflow-hidden">
@@ -88,14 +113,18 @@ function AuthForm() {
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500" />
               </div>
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                value={formData.email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                className="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition-all duration-200 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                required
-              />
+             <input
+          type="email"
+          placeholder="Enter your email address"
+          value={formData.email}
+          onChange={(e) => handleInputtChange("email", e.target.value)}
+          className={`w-full pl-12 pr-4 py-4 rounded-xl border ${
+            emailError
+              ? "border-red-500 focus:border-red-500 focus:ring-red-100"
+              : "border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-100"
+          } dark:focus:border-blue-400 focus:ring-4 dark:focus:ring-blue-900/20 transition-all duration-200 bg-white/80 dark:bg-gray-700/80 backdrop-blur-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400`}
+          required
+        />
             </div>
           )}<div className="relative">
   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">

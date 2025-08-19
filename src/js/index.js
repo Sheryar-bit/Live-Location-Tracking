@@ -10,7 +10,9 @@
             const role = document.getElementById("role").value;
         
             console.log("Sending registration request:", { name, email, password, role });
-        
+
+
+        //Api call to register a new user
             fetch("http://localhost:5000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
