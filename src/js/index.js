@@ -10,7 +10,8 @@
             const role = document.getElementById("role").value;
         
             console.log("Sending registration request:", { name, email, password, role });
-        
+            
+            // Send registration request to the server
             fetch("http://localhost:5000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
