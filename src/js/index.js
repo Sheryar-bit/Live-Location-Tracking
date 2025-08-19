@@ -35,7 +35,8 @@
         function login() {
             const name = document.getElementById("name").value;
             const password = document.getElementById("password").value;
-          
+
+            //login Api call
             fetch("http://localhost:5000/login", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
