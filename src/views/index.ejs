@@ -11,7 +11,10 @@
     <h2>Live Location Tracking</h2>
     <div>
         <input type="text" id="name" placeholder="Name" required>
-        <input type="email" id="email" placeholder="Email" required>
+        <!-- <input type="email" id="email" placeholder="Email" required> -->
+         <input type="email" id="email" placeholder="Email" required>
+        <span id="email-error" style="color: red; font-size: 14px;"></span>
+
         <input type="password" id="password" placeholder="Password" required>
         <select id="role">
             <option value="user">User</option>
@@ -30,4 +33,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="/js/index.js"></script>
+<script>
+  const emailInput = document.getElementById("email");
+  const errorSpan = document.getElementById("email-error");
+
+  emailInput.addEventListener("input", () => {
+    const email = emailInput.value;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/; // Simple email pattern
+
+    if (!emailPattern.test(email)) {
+      errorSpan.textContent = "Please enter a valid email address.";
+      emailInput.setCustomValidity("Invalid email address");
+    } else {
+      errorSpan.textContent = "";
+      emailInput.setCustomValidity("");
+    }
+  });
+</script>
 </html>
